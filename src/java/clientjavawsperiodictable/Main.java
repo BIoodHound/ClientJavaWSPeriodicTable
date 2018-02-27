@@ -22,13 +22,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {  
-        System.out.println("Enter an element to learn more about it\nfor a list of elements type 'list' for a full list of all elements");
-        Scanner s = new Scanner(System.in);
-        String res = s.nextLine();
-        
-        if(res.equals("list")){
-            atomList();
-        } else {atomData(res);}
+        while(true){
+            System.out.println("Enter an element to learn more about it\nfor a list of elements type 'list' for a full list of all elements");
+            Scanner s = new Scanner(System.in);
+            String res = s.nextLine();
+            if(res.equals("list")){
+                atomList();
+            } else {atomData(res);}
+        }
     }
     private static void atomList(){
         try{
@@ -36,7 +37,12 @@ public class Main {
             String atomSource = getAtoms();
             atomDataSet atomDataSet = new atomDataSet();
             serializer.read(atomDataSet, atomSource);
-            System.out.println(atomDataSet.getAtomTables().getElementName());
+            int i = 0;
+            while(i<atomDataSet.getAtomTables().size()){
+                System.out.println(atomDataSet.getAtomTables().get(i).getElementName());
+                i++;
+            }
+            
         } catch(Exception e) {
             System.out.println("You done goof good sir");
         }
